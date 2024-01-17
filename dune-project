@@ -18,7 +18,6 @@
 (package
  (name loc)
  (synopsis "Representing ranges of lexing positions from parsed files")
- (description "Representing ranges of lexing positions from parsed files")
  (depends
   (ocaml
    (>= 5.1))
