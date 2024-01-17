@@ -38,3 +38,16 @@ val with_dummy_pos : t -> t
 
 val path : t -> Fpath.t
 val line : t -> int
+val start_pos_cnum : t -> int
+val stop_pos_cnum : t -> int
+
+module Lexbuf_loc : sig
+  type t = Stdune.Lexbuf.Loc.t =
+    { start : Source_code_position.t
+    ; stop : Source_code_position.t
+    }
+end
+
+val to_lexbuf_loc : t -> Lexbuf_loc.t
+val start_pos : t -> Source_code_position.t
+val stop_pos : t -> Source_code_position.t

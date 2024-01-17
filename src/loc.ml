@@ -63,3 +63,17 @@ let line t =
   let t = Stdune.Loc.to_lexbuf_loc t in
   t.start.pos_lnum
 ;;
+
+let start_pos_cnum = Stdune.Loc.start_pos_cnum
+let stop_pos_cnum = Stdune.Loc.stop_pos_cnum
+let start_pos t = (Stdune.Loc.to_lexbuf_loc t).start
+let stop_pos t = (Stdune.Loc.to_lexbuf_loc t).stop
+
+module Lexbuf_loc = struct
+  type t = Stdune.Lexbuf.Loc.t =
+    { start : Source_code_position.t
+    ; stop : Source_code_position.t
+    }
+end
+
+let to_lexbuf_loc = Stdune.Loc.to_lexbuf_loc
