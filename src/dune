@@ -2,7 +2,7 @@
  (name loc)
  (public_name loc)
  (wrapped false)
- (flags :standard -w +a-4-40-41-42-44-45-66 -warn-error +a -open Base)
+ (flags :standard -w +a-4-40-41-42-44-45-48-66 -warn-error +a -open Base)
  (libraries base fpath stdune)
  (preprocess
   (pps ppx_jane ppx_js_style -check-doc-comments)))

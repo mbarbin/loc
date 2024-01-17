@@ -1,7 +1,7 @@
 (library
  (name loc_test)
  (inline_tests)
- (flags :standard -w +a-4-40-41-42-44-45-66 -warn-error +a)
+ (flags :standard -w +a-4-40-41-42-44-45-48-66 -warn-error +a)
  (libraries loc)
  (preprocess
   (pps ppx_jane ppx_js_style -check-doc-comments)))
