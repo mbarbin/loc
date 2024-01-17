@@ -8,14 +8,14 @@ homepage: "https://github.com/mbarbin/loc"
 doc: "https://mbarbin.github.io/loc/"
 bug-reports: "https://github.com/mbarbin/loc/issues"
 depends: [
+  "dune" {>= "3.12"}
   "ocaml" {>= "5.1"}
-  "dune" {>= "3.11" & >= "3.11"}
   "base" {>= "v0.16" & < "v0.17"}
   "expect_test_helpers_core" {with-test & >= "v0.16" & < "v0.17"}
   "fpath" {>= "0.7.3"}
   "ppx_jane" {>= "v0.16" & < "v0.17"}
   "ppx_js_style" {>= "v0.16" & < "v0.17"}
-  "stdune" {>= "3.11"}
+  "stdune" {>= "3.12"}
   "odoc" {with-doc}
 ]
 build: [
