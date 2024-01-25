@@ -1,6 +1,8 @@
 (library
  (name loc)
  (public_name loc)
+ (instrumentation
+  (backend bisect_ppx))
  (wrapped false)
  (flags :standard -w +a-4-40-41-42-44-45-48-66 -warn-error +a -open Base)
  (libraries base fpath stdune)
