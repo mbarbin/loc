@@ -51,3 +51,36 @@ end
 val to_lexbuf_loc : t -> Lexbuf_loc.t
 val start_pos : t -> Source_code_position.t
 val stop_pos : t -> Source_code_position.t
+
+(** {1 Utils on offsets and ranges} *)
+
+module Offset : sig
+  (** Number of bytes from the beginning of the input. The first byte has offset
+      [0]. *)
+  type t = int [@@deriving equal, sexp_of]
+
+  val of_source_code_position : Source_code_position.t -> t
+end
+
+val start_offset : t -> Offset.t
+val stop_offset : t -> Offset.t
+
+module Range : sig
+  (** A range refers to a chunk of the file, from start (included) to stop
+      (excluded). *)
+  type t =
+    { start : Offset.t
+    ; stop : Offset.t
+    }
+  [@@deriving equal, sexp_of]
+
+  val of_source_code_positions
+    :  start:Source_code_position.t
+    -> stop:Source_code_position.t
+    -> t
+
+  (** Build the range that covers both inputs, and what may be in between. *)
+  val interval : t -> t -> t
+end
+
+val range : t -> Range.t

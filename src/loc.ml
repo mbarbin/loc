@@ -77,3 +77,35 @@ module Lexbuf_loc = struct
 end
 
 let to_lexbuf_loc = Stdune.Loc.to_lexbuf_loc
+
+module Offset = struct
+  type t = int [@@deriving equal, sexp_of]
+
+  let of_source_code_position (t : Source_code_position.t) = t.pos_cnum
+end
+
+let start_offset t = t |> start_pos |> Offset.of_source_code_position
+let stop_offset t = t |> stop_pos |> Offset.of_source_code_position
+
+module Range = struct
+  type t =
+    { start : Offset.t
+    ; stop : Offset.t
+    }
+  [@@deriving equal, sexp_of]
+
+  let of_source_code_positions ~start ~stop =
+    { start = Offset.of_source_code_position start
+    ; stop = Offset.of_source_code_position stop
+    }
+  ;;
+
+  let interval { start = start1; stop = stop1 } { start = start2; stop = stop2 } =
+    { start = Int.min start1 start2; stop = Int.max stop1 stop2 }
+  ;;
+end
+
+let range t =
+  let t = to_lexbuf_loc t in
+  Range.of_source_code_positions ~start:t.start ~stop:t.stop
+;;
