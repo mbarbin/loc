@@ -49,6 +49,10 @@
     :with-test
     (>= v0.16)
     (< v0.17)))
+  (ppx_fields_conv
+   (and
+    (>= v0.16)
+    (< v0.17)))
   (ppx_hash
    (and
     (>= v0.16)
