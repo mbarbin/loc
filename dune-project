@@ -29,7 +29,7 @@
    (and
     :dev
     (>= 2.8.3)))
-  (expect_test_helpers_core
+  (expect-test-helpers
    (and
     :with-test
     (>= v0.16)
