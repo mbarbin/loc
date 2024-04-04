@@ -19,10 +19,15 @@ let of_pos p = Stdune.Loc.of_lexbuf_loc { start = p; stop = p }
 
 let to_string t =
   let t = Stdune.Loc.to_lexbuf_loc t in
+  let lnum =
+    if t.start.pos_lnum = t.stop.pos_lnum
+    then Printf.sprintf "line %d" t.start.pos_lnum
+    else Printf.sprintf "lines %d-%d" t.start.pos_lnum t.stop.pos_lnum
+  in
   Printf.sprintf
-    "File %S, line %d, characters %d-%d:"
+    "File %S, %s, characters %d-%d:"
     t.start.pos_fname
-    t.start.pos_lnum
+    lnum
     (t.start.pos_cnum - t.start.pos_bol)
     (t.stop.pos_cnum - t.stop.pos_bol)
 ;;
