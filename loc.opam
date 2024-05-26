@@ -10,20 +10,20 @@ bug-reports: "https://github.com/mbarbin/loc/issues"
 depends: [
   "dune" {>= "3.15"}
   "ocaml" {>= "5.1"}
-  "base" {>= "v0.16" & < "v0.17"}
+  "base" {>= "v0.17" & < "v0.18"}
   "bisect_ppx" {dev & >= "2.8.3"}
-  "expect-test-helpers" {with-test & >= "v0.16" & < "v0.17"}
+  "expect-test-helpers" {with-test & >= "v0.17" & < "v0.18"}
   "fpath" {>= "0.7.3"}
-  "ppx_compare" {>= "v0.16" & < "v0.17"}
-  "ppx_enumerate" {>= "v0.16" & < "v0.17"}
-  "ppx_expect" {with-test & >= "v0.16" & < "v0.17"}
-  "ppx_fields_conv" {>= "v0.16" & < "v0.17"}
-  "ppx_hash" {>= "v0.16" & < "v0.17"}
-  "ppx_here" {>= "v0.16" & < "v0.17"}
-  "ppx_js_style" {dev & >= "v0.16" & < "v0.17"}
-  "ppx_let" {>= "v0.16" & < "v0.17"}
-  "ppx_sexp_conv" {>= "v0.16" & < "v0.17"}
-  "ppx_sexp_value" {>= "v0.16" & < "v0.17"}
+  "ppx_compare" {>= "v0.17" & < "v0.18"}
+  "ppx_enumerate" {>= "v0.17" & < "v0.18"}
+  "ppx_expect" {with-test & >= "v0.17" & < "v0.18"}
+  "ppx_fields_conv" {>= "v0.17" & < "v0.18"}
+  "ppx_hash" {>= "v0.17" & < "v0.18"}
+  "ppx_here" {>= "v0.17" & < "v0.18"}
+  "ppx_js_style" {dev & >= "v0.17" & < "v0.18"}
+  "ppx_let" {>= "v0.17" & < "v0.18"}
+  "ppx_sexp_conv" {>= "v0.17" & < "v0.18"}
+  "ppx_sexp_value" {>= "v0.17" & < "v0.18"}
   "stdune" {>= "3.15"}
   "odoc" {with-doc}
 ]
