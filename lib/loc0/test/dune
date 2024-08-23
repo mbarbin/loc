@@ -1,19 +1,19 @@
 (library
- (name loc)
- (public_name loc)
+ (name loc0_test)
+ (public_name loc-tests.loc0_test)
+ (inline_tests)
+ (flags :standard -w +a-4-40-41-42-44-45-48-66 -warn-error +a -open Loc0)
+ (libraries loc0)
  (instrumentation
   (backend bisect_ppx))
  (lint
   (pps ppx_js_style -check-doc-comments))
- (wrapped false)
- (flags :standard -w +a-4-40-41-42-44-45-48-66 -warn-error +a -open Base)
- (libraries base fpath stdune)
  (preprocess
   (pps
    -unused-type-warnings=force
    ppx_compare
    ppx_enumerate
-   ppx_fields_conv
+   ppx_expect
    ppx_hash
    ppx_here
    ppx_let

@@ -22,7 +22,9 @@ type 'a t =
   { loc : Loc.t
   ; symbol : 'a
   }
-[@@deriving equal, fields, sexp_of]
+
+val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
+val sexp_of_t : ('a -> Sexp.t) -> 'a t -> Sexp.t
 
 (** To be called in the right hand side of a Menhir rule, using the [$loc]
     special keyword provided by Menhir. For example:
@@ -32,7 +34,7 @@ type 'a t =
        | ident=IDENT { With_loc.create $loc ident }
       ;
     ]} *)
-val create : Source_code_position.t * Source_code_position.t -> 'a -> 'a t
+val create : Lexing.position * Lexing.position -> 'a -> 'a t
 
 (** Build the first line of error messages to produce to stderr using the same
     syntax as used by the OCaml compiler. If your editor has logic to recognize
@@ -41,3 +43,8 @@ val to_string : 'a t -> string
 
 val map : 'a t -> f:('a -> 'b) -> 'b t
 val with_dummy_pos : 'a -> 'a t
+
+(** {1 Fields getters} *)
+
+val loc : _ t -> Loc.t
+val symbol : 'a t -> 'a

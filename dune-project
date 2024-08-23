@@ -16,8 +16,32 @@
 (documentation "https://mbarbin.github.io/loc/")
 
 (package
- (name loc)
+ (name loc0)
  (synopsis "Representing ranges of lexing positions from parsed files")
+ (depends
+  (ocaml
+   (>= 5.2))
+  (bisect_ppx
+   (and
+    :dev
+    (>= 2.8.3)))
+  (fpath
+   (>= 0.7.3))
+  (ppx_js_style
+   (and
+    :dev
+    (>= v0.17)
+    (< v0.18)))
+  (sexplib0
+   (and
+    (>= v0.17)
+    (< v0.18)))
+  (stdune
+   (>= 3.16))))
+
+(package
+ (name loc-tests)
+ (synopsis "Tests for loc")
  (depends
   (ocaml
    (>= 5.2))
@@ -29,13 +53,14 @@
    (and
     :dev
     (>= 2.8.3)))
-  (expect-test-helpers
+  (expect_test_helpers_core
    (and
-    :with-test
     (>= v0.17)
     (< v0.18)))
   (fpath
    (>= 0.7.3))
+  (loc0
+   (= :version))
   (ppx_compare
    (and
     (>= v0.17)
@@ -45,11 +70,6 @@
     (>= v0.17)
     (< v0.18)))
   (ppx_expect
-   (and
-    :with-test
-    (>= v0.17)
-    (< v0.18)))
-  (ppx_fields_conv
    (and
     (>= v0.17)
     (< v0.18)))

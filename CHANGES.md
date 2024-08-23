@@ -1,3 +1,11 @@
+## 0.1.0 (2024-08-23)
+
+### Changed
+
+- Less dependencies: remove `base` & ppx preprocessing.
+- Rename main package `loc0` in preparation to release to opam in the future.
+- Remove `base` dependency, reduced to `sexplib0`.
+
 ## 0.0.6 (2024-07-26)
 
 ### Added
