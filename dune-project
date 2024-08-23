@@ -1,6 +1,6 @@
 (lang dune 3.16)
 
-(name loc)
+(name loc0)
 
 (generate_opam_files)
 
