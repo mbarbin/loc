@@ -1,6 +1,6 @@
 (lang dune 3.16)
 
-(name loc0)
+(name loc)
 
 (generate_opam_files)
 
@@ -16,20 +16,24 @@
 (documentation "https://mbarbin.github.io/loc/")
 
 (package
- (name loc0)
+ (name loc)
  (synopsis "Representing ranges of lexing positions from parsed files")
  (depends
   (ocaml
    (>= 5.2))
+  (ocamlformat
+   (and
+    :with-dev-setup
+    (= 0.26.2)))
   (bisect_ppx
    (and
-    :dev
+    :with-dev-setup
     (>= 2.8.3)))
   (fpath
    (>= 0.7.3))
   (ppx_js_style
    (and
-    :dev
+    :with-dev-setup
     (>= v0.17)
     (< v0.18)))
   (sexplib0
@@ -45,13 +49,17 @@
  (depends
   (ocaml
    (>= 5.2))
+  (ocamlformat
+   (and
+    :with-dev-setup
+    (= 0.26.2)))
   (base
    (and
     (>= v0.17)
     (< v0.18)))
   (bisect_ppx
    (and
-    :dev
+    :with-dev-setup
     (>= 2.8.3)))
   (expect_test_helpers_core
    (and
@@ -59,7 +67,7 @@
     (< v0.18)))
   (fpath
    (>= 0.7.3))
-  (loc0
+  (loc
    (= :version))
   (ppx_compare
    (and
@@ -83,7 +91,7 @@
     (< v0.18)))
   (ppx_js_style
    (and
-    :dev
+    :with-dev-setup
     (>= v0.17)
     (< v0.18)))
   (ppx_let
