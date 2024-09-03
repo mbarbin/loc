@@ -1,3 +1,15 @@
+## 0.2.0 (2024-09-03)
+
+### Added
+
+- Added test - increase coverage.
+
+### Changed
+
+- Rename `Loc.Txt` fields to be closer to upstream compiler libs conventions.
+- Merged `With_loc` into the main module, as `Loc.Txt`.
+- Revert renaming the lib `loc0` - back to `loc`.
+
 ## 0.1.0 (2024-08-23)
 
 ### Changed

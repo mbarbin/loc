@@ -1,5 +1,7 @@
-(executable
- (name main)
+(library
+ (name loc_test)
+ (public_name loc-tests.loc_test)
+ (inline_tests)
  (flags
   :standard
   -w
@@ -9,26 +11,20 @@
   -open
   Base
   -open
-  Commandlang
-  -open
-  Err0
-  -open
-  Loc0)
- (libraries base commandlang commandlang-to-cmdliner err0 loc0)
+  Expect_test_helpers_base)
+ (libraries base expect_test_helpers_core.expect_test_helpers_base loc)
  (instrumentation
   (backend bisect_ppx))
  (lint
-  (pps ppx_js_style -allow-let-operators -check-doc-comments))
+  (pps ppx_js_style -check-doc-comments))
  (preprocess
   (pps
    -unused-code-warnings=force
    ppx_compare
    ppx_enumerate
+   ppx_expect
    ppx_hash
    ppx_here
    ppx_let
    ppx_sexp_conv
    ppx_sexp_value)))
-
-(cram
- (deps main.exe))
