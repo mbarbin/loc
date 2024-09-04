@@ -1,3 +1,10 @@
+let%expect_test "getters" =
+  let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents:"" in
+  print_endline (Loc.File_cache.path file_cache |> Fpath.to_string);
+  [%expect {| foo.txt |}];
+  ()
+;;
+
 let%expect_test "negative" =
   let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents:"" in
   require_does_raise [%here] (fun () -> Loc.in_file_line ~file_cache ~line:0);
