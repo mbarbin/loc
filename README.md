@@ -7,7 +7,7 @@ Loc is an OCaml library to manipulate code locations, which are ranges of lexing
 
 It is inspired by dune's `Loc.t`, and uses it under the hood. The type equality with `Stdune.Loc.t` is currently not exposed and `Stdune` not mentioned in the interface of `Loc`, with the aim of keeping the signature of `Loc` stable across potential internal changes in `Stdune`.
 
-## Code documentation
+## Code Documentation
 
 The code documentation of the latest release is built with `odoc` and published to `GitHub` pages [here](https://mbarbin.github.io/loc).
 
