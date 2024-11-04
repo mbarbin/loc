@@ -1,3 +1,19 @@
+## 0.2.1 (2024-11-04)
+
+### Added
+
+- Add utils to build locs from file offsets and ranges (#6, @mbarbin).
+- Make the library build with `ocaml.4.14` (#5, @mbarbin).
+- Add new checks in CI (build checks on windows and macos) (#5, @mbarbin).
+
+### Changed
+
+- Rename `Loc.in_file` to `Loc.of_file`; rename `Loc.in_file_line` to `Loc.of_file_line` (#6, @mbarbin).
+
+### Deprecated
+
+- Prepare `Loc.in_file` and `Loc.in_file_line` for deprecation (#6, @mbarbin).
+
 ## 0.2.0 (2024-09-03)
 
 ### Added

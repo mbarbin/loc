@@ -61,7 +61,7 @@ val of_lexbuf : Lexing.lexbuf -> t
 (** Build a location identifying the file as a whole. This is a practical
     location to use when it is not possible to build a more precise location
     rather than the entire file. *)
-val in_file : path:Fpath.t -> t
+val of_file : path:Fpath.t -> t
 
 (** [none] is a special value to be used when no location information is available. *)
 val none : t
@@ -83,7 +83,7 @@ end
 
 (** Create a location that covers the entire line [line] of the file. Lines
     start at [1]. Raises [Invalid_argument] if the line overflows. *)
-val in_file_line : file_cache:File_cache.t -> line:int -> t
+val of_file_line : file_cache:File_cache.t -> line:int -> t
 
 (** {1 Getters} *)
 
@@ -137,10 +137,16 @@ module Offset : sig
 
   (** Reading the [pos_cnum] of a lexing position. *)
   val of_position : Lexing.position -> t
+
+  (** Rebuild the position from a file at the given offset. *)
+  val to_position : t -> file_cache:File_cache.t -> Lexing.position
 end
 
 val start_offset : t -> Offset.t
 val stop_offset : t -> Offset.t
+
+(** A convenient wrapper to build a loc from the position at a given offset. *)
+val of_file_offset : file_cache:File_cache.t -> offset:Offset.t -> t
 
 module Range : sig
   (** A range refers to a chunk of the file, from start (included) to stop
@@ -159,6 +165,9 @@ module Range : sig
 end
 
 val range : t -> Range.t
+
+(** A convenient wrapper to build a loc from a file range. *)
+val of_file_range : file_cache:File_cache.t -> range:Range.t -> t
 
 module Txt : sig
   (** When the symbol you want to decorate is not already an argument in a
@@ -217,4 +226,30 @@ module Txt : sig
 
   val loc : _ t -> loc
   val txt : 'a t -> 'a
+end
+
+(** {1 Deprecated aliases}
+
+    This part of the API will be deprecated in a future version. *)
+
+(** This was renamed [of_file]. *)
+val in_file : path:Fpath.t -> t
+
+(** This was renamed [of_file_line]. *)
+val in_file_line : file_cache:File_cache.t -> line:int -> t
+
+(** {1 Private} *)
+
+module Private : sig
+  (** Exported for testing only.
+
+      This module is meant for tests only. Its signature may change in breaking ways
+      at any time without prior notice, and outside of the guidelines set by
+      semver. Do not use. *)
+
+  module File_cache : sig
+    type t = File_cache.t
+
+    val sexp_of_t : t -> Sexp.t
+  end
 end
