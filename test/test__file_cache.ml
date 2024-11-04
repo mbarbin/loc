@@ -180,7 +180,7 @@ let%expect_test "of_file_offset" =
   in
   require_does_raise [%here] (fun () -> test (-1));
   [%expect {| (Invalid_argument Loc.File_cache.position) |}];
-  require_does_raise [%here] (fun () -> test (String.length file_contents));
+  require_does_raise [%here] (fun () -> test (String.length file_contents + 1));
   [%expect {| (Invalid_argument Loc.File_cache.position) |}];
   test 0;
   [%expect {| File "foo.txt", line 1, characters 0-0: |}];
@@ -190,6 +190,8 @@ let%expect_test "of_file_offset" =
   [%expect {| File "foo.txt", line 1, characters 10-10: |}];
   test 11;
   [%expect {| File "foo.txt", line 2, characters 0-0: |}];
+  test (String.length file_contents);
+  [%expect {| File "foo.txt", line 11, characters 0-0: |}];
   ()
 ;;
 
@@ -209,8 +211,10 @@ let%expect_test "of_file_offset more" =
     let loc = Loc.of_file_offset ~file_cache ~offset in
     print_endline (Loc.to_string loc)
   in
-  require_does_raise [%here] (fun () -> test (String.length file_contents));
+  require_does_raise [%here] (fun () -> test (String.length file_contents + 1));
   [%expect {| (Invalid_argument Loc.File_cache.position) |}];
+  test (String.length file_contents);
+  [%expect {| File "foo.txt", line 3, characters 0-0: |}];
   test (String.length file_contents - 1);
   [%expect {| File "foo.txt", line 2, characters 4-4: |}];
   let file_contents = "Hello\nFriendly\nWorld\n" in
@@ -228,8 +232,10 @@ let%expect_test "of_file_offset more" =
     let loc = Loc.of_file_offset ~file_cache ~offset in
     print_endline (Loc.to_string loc)
   in
-  require_does_raise [%here] (fun () -> test (String.length file_contents));
+  require_does_raise [%here] (fun () -> test (String.length file_contents + 1));
   [%expect {| (Invalid_argument Loc.File_cache.position) |}];
+  test (String.length file_contents);
+  [%expect {| File "foo.txt", line 4, characters 0-0: |}];
   test (String.length file_contents - 1);
   [%expect {| File "foo.txt", line 3, characters 5-5: |}];
   let file_contents = "Hello\nFriendly\nWorld" in
@@ -247,8 +253,10 @@ let%expect_test "of_file_offset more" =
     let loc = Loc.of_file_offset ~file_cache ~offset in
     print_endline (Loc.to_string loc)
   in
-  require_does_raise [%here] (fun () -> test (String.length file_contents));
+  require_does_raise [%here] (fun () -> test (String.length file_contents + 1));
   [%expect {| (Invalid_argument Loc.File_cache.position) |}];
+  test (String.length file_contents);
+  [%expect {| File "foo.txt", line 4, characters 0-0: |}];
   test (String.length file_contents - 1);
   [%expect {| File "foo.txt", line 3, characters 4-4: |}];
   ()
@@ -263,7 +271,7 @@ let%expect_test "of_file_range" =
   in
   require_does_raise [%here] (fun () -> test (-1) 0);
   [%expect {| (Invalid_argument Loc.File_cache.position) |}];
-  require_does_raise [%here] (fun () -> test 0 (String.length file_contents));
+  require_does_raise [%here] (fun () -> test 0 (String.length file_contents + 1));
   [%expect {| (Invalid_argument Loc.File_cache.position) |}];
   require_does_raise [%here] (fun () -> test 1 0);
   [%expect {| (Invalid_argument Loc.of_file_range) |}];
@@ -275,5 +283,9 @@ let%expect_test "of_file_range" =
   [%expect {| File "foo.txt", lines 1-2, characters 10-11: |}];
   test 11 15;
   [%expect {| File "foo.txt", line 2, characters 0-4: |}];
+  test 0 (String.length file_contents);
+  [%expect {| File "foo.txt", lines 1-11, characters 0-109: |}];
+  test 45 (String.length file_contents);
+  [%expect {| File "foo.txt", lines 5-11, characters 1-65: |}];
   ()
 ;;

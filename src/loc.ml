@@ -132,7 +132,7 @@ module File_cache = struct
             ; pos_bol
             }))
     in
-    if pos_cnum < 0 || pos_cnum >= t.length
+    if pos_cnum < 0 || pos_cnum > t.length
     then raise (Invalid_argument "Loc.File_cache.position")
     else binary_search ~from:0 ~to_:(Array.length t.bols - 1)
   ;;

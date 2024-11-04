@@ -1,3 +1,17 @@
+## 0.2.2 (unreleased)
+
+### Added
+
+### Changed
+
+### Deprecated
+
+### Fixed
+
+- Fix `Offset.to_position` to allow the end-of-file offset instead of raising (#7, @mbarbin).
+
+### Removed
+
 ## 0.2.1 (2024-11-04)
 
 ### Added

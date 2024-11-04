@@ -138,14 +138,19 @@ module Offset : sig
   (** Reading the [pos_cnum] of a lexing position. *)
   val of_position : Lexing.position -> t
 
-  (** Rebuild the position from a file at the given offset. *)
+  (** Rebuild the position from a file at the given offset. Raises
+      [Invalid_argument] if [offset < 0] or if [offset > file.length]. The
+      end-of-file position [file.length] is purposely allowed in order for the
+      resulting position to be used as [stop] value for a range covering the
+      file until its last character (which may occasionally be useful). *)
   val to_position : t -> file_cache:File_cache.t -> Lexing.position
 end
 
 val start_offset : t -> Offset.t
 val stop_offset : t -> Offset.t
 
-(** A convenient wrapper to build a loc from the position at a given offset. *)
+(** A convenient wrapper to build a loc from the position at a given offset. See
+    {!val:Offset.to_position}. *)
 val of_file_offset : file_cache:File_cache.t -> offset:Offset.t -> t
 
 module Range : sig
@@ -166,7 +171,9 @@ end
 
 val range : t -> Range.t
 
-(** A convenient wrapper to build a loc from a file range. *)
+(** A convenient wrapper to build a loc from a file range. Raises
+    [Invalid_argument] if the range is not valid for that file. See
+    {!val:Offset.to_position}. *)
 val of_file_range : file_cache:File_cache.t -> range:Range.t -> t
 
 module Txt : sig
