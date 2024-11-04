@@ -1,4 +1,4 @@
-let loc = Loc.in_file ~path:(Fpath.v "file")
+let loc = Loc.of_file ~path:(Fpath.v "file")
 
 let%expect_test "to_string" =
   print_endline (Loc.to_string loc);
