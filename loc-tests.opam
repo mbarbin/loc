@@ -8,7 +8,7 @@ homepage: "https://github.com/mbarbin/loc"
 doc: "https://mbarbin.github.io/loc/"
 bug-reports: "https://github.com/mbarbin/loc/issues"
 depends: [
-  "dune" {>= "3.16"}
+  "dune" {>= "3.17"}
   "ocaml" {>= "4.14"}
   "ocamlformat" {with-dev-setup & = "0.27.0"}
   "base" {>= "v0.16" & < "v0.18"}
@@ -26,7 +26,7 @@ depends: [
   "ppx_sexp_conv" {>= "v0.16" & < "v0.18"}
   "ppx_sexp_value" {>= "v0.16" & < "v0.18"}
   "ppxlib" {>= "0.33"}
-  "stdune" {>= "3.16"}
+  "stdune" {>= "3.17"}
   "odoc" {with-doc}
 ]
 build: [

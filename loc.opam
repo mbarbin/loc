@@ -8,11 +8,11 @@ homepage: "https://github.com/mbarbin/loc"
 doc: "https://mbarbin.github.io/loc/"
 bug-reports: "https://github.com/mbarbin/loc/issues"
 depends: [
-  "dune" {>= "3.16"}
+  "dune" {>= "3.17"}
   "ocaml" {>= "4.14"}
   "fpath" {>= "0.7.3"}
   "sexplib0" {>= "v0.16" & < "v0.18"}
-  "stdune" {>= "3.16"}
+  "stdune" {>= "3.17"}
   "odoc" {with-doc}
 ]
 build: [

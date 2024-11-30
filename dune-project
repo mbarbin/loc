@@ -1,4 +1,4 @@
-(lang dune 3.16)
+(lang dune 3.17)
 
 (name loc)
 
@@ -28,7 +28,7 @@
     (>= v0.16)
     (< v0.18)))
   (stdune
-   (>= 3.16))))
+   (>= 3.17))))
 
 (package
  (name loc-tests)
@@ -96,4 +96,4 @@
   (ppxlib
    (>= 0.33))
   (stdune
-   (>= 3.16))))
+   (>= 3.17))))
