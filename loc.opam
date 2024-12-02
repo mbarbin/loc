@@ -30,3 +30,15 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/mbarbin/loc.git"
+description: """\
+
+Loc is an OCaml library for manipulating code locations, which are
+ranges of lexing positions from a parsed file.
+
+Attaching locations to nodes manipulated by programs can be useful for
+various applications such as compilers, interpreters, linters, and
+refactoring tools.
+
+"""
+tags: [ "code-locations" "lexing" ]
+x-maintenance-intent: [ "(latest)" ]
