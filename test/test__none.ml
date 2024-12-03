@@ -38,7 +38,8 @@ let%expect_test "offsets" =
       { start_offset = (Loc.start_offset Loc.none : int)
       ; stop_offset = (Loc.stop_offset Loc.none : int)
       }];
-  [%expect {|
+  [%expect
+    {|
     ((start_offset 0)
      (stop_offset  0))
     |}];
@@ -47,7 +48,8 @@ let%expect_test "offsets" =
 
 let%expect_test "range" =
   print_s [%sexp (Loc.range Loc.none : Loc.Range.t)];
-  [%expect {|
+  [%expect
+    {|
     ((start 0)
      (stop  0))
     |}];

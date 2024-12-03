@@ -72,92 +72,110 @@ let%expect_test "equal" =
     print_s [%sexp { equal : bool; equal_ignores_locs : bool }]
   in
   test a1 a1;
-  [%expect {|
+  [%expect
+    {|
     ((equal              true)
      (equal_ignores_locs true))
     |}];
   test a1 a2;
-  [%expect {|
+  [%expect
+    {|
     ((equal              true)
      (equal_ignores_locs true))
     |}];
   test a1 a3;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs false))
     |}];
   test b1 b1;
-  [%expect {|
+  [%expect
+    {|
     ((equal              true)
      (equal_ignores_locs true))
     |}];
   test b1 b2;
-  [%expect {|
+  [%expect
+    {|
     ((equal              true)
      (equal_ignores_locs true))
     |}];
   test b1 b3;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs false))
     |}];
   test c1 c1;
-  [%expect {|
+  [%expect
+    {|
     ((equal              true)
      (equal_ignores_locs true))
     |}];
   test c1 c2;
-  [%expect {|
+  [%expect
+    {|
     ((equal              true)
      (equal_ignores_locs true))
     |}];
   test c1 c3;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs false))
     |}];
   test a1 b1;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];
   test a2 b2;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];
   test a3 b3;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];
   test a1 c1;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];
   test a2 c2;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];
   test a3 c3;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];
   test b1 c1;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];
   test b2 c2;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];
   test b3 c3;
-  [%expect {|
+  [%expect
+    {|
     ((equal              false)
      (equal_ignores_locs true))
     |}];

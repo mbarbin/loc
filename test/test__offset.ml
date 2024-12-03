@@ -29,17 +29,20 @@ let%expect_test "of_position" =
 
 let%expect_test "start/stop" =
   print_offsets (Loc.of_position p1);
-  [%expect {|
+  [%expect
+    {|
     ((start_offset 9)
      (stop_offset  9))
     |}];
   print_offsets (Loc.of_position p2);
-  [%expect {|
+  [%expect
+    {|
     ((start_offset 26)
      (stop_offset  26))
     |}];
   print_offsets (Loc.create (p1, p2));
-  [%expect {|
+  [%expect
+    {|
     ((start_offset 9)
      (stop_offset  26))
     |}];

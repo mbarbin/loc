@@ -4,7 +4,8 @@ let%expect_test "none" =
   [%expect {| _ |}];
   Ref.set_temporarily Loc.include_sexp_of_locs true ~f:(fun () ->
     print_s [%sexp (loc : Loc.t)];
-    [%expect {|
+    [%expect
+      {|
       ((start <none>:1:0)
        (stop  <none>:1:0))
       |}]);
@@ -17,7 +18,8 @@ let%expect_test "pos" =
   let loc = Loc.of_pos ("fname", 1, 15, 15) in
   Ref.set_temporarily Loc.include_sexp_of_locs true ~f:(fun () ->
     print_s [%sexp (loc : Loc.t)];
-    [%expect {|
+    [%expect
+      {|
       ((start fname:1:15)
        (stop  fname:1:15))
       |}]);
@@ -32,7 +34,8 @@ let%expect_test "loc" =
   in
   Ref.set_temporarily Loc.include_sexp_of_locs true ~f:(fun () ->
     print_s [%sexp (loc : Loc.t)];
-    [%expect {|
+    [%expect
+      {|
       ((start file:1:2)
        (stop  file:1:10))
       |}]);

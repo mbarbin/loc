@@ -28,7 +28,8 @@ let%expect_test "is_none" =
 
 let%expect_test "range" =
   print_s [%sexp (Loc.range loc : Loc.Range.t)];
-  [%expect {|
+  [%expect
+    {|
     ((start 0)
      (stop  0))
     |}];
