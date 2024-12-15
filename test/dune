@@ -12,7 +12,7 @@
   Base
   -open
   Expect_test_helpers_base)
- (libraries base expect_test_helpers_core.expect_test_helpers_base loc)
+ (libraries base expect_test_helpers_core.expect_test_helpers_base fpath loc)
  (instrumentation
   (backend bisect_ppx))
  (lint
