@@ -98,4 +98,8 @@
   (ppxlib
    (>= 0.33))
   (stdune
-   (>= 3.17))))
+   (>= 3.17))
+  (sherlodoc
+   (and
+    :with-doc
+    (>= 0.2)))))
