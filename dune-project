@@ -15,7 +15,8 @@
 
 (documentation "https://mbarbin.github.io/loc/")
 
-(implicit_transitive_deps false)
+;; CR mbarbin: I removed this temporarily to investigate an ocamlmig issue.
+;; (implicit_transitive_deps false)
 
 (package
  (name loc)
