@@ -242,13 +242,13 @@ end
 (** This was renamed [of_file]. *)
 val in_file : path:Fpath.t -> t
 [@@ocaml.deprecated "[since 2025-03] Use [Loc.of_file]. Hint: Run [ocamlmig migrate]"]
-[@@migrate { repl = of_file }]
+[@@migrate { repl = Rel.of_file }]
 
 (** This was renamed [of_file_line]. *)
 val in_file_line : file_cache:File_cache.t -> line:int -> t
 [@@ocaml.deprecated
   "[since 2025-03] Use [Loc.of_file_line]. Hint: Run [ocamlmig migrate]"]
-[@@migrate { repl = of_file_line }]
+[@@migrate { repl = Rel.of_file_line }]
 
 (** {1 Private} *)
 
