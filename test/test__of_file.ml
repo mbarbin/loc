@@ -35,3 +35,14 @@ let%expect_test "range" =
     |}];
   ()
 ;;
+
+(* With this code fragment, we can exercise the [ocamlmig] attributes located in
+   the [Loc] deprecated API.
+
+   Run: [ocamlmig migrate] to check. *)
+let _f ~file_cache ~path ~line =
+  (ignore (Loc.in_file ~path : Loc.t);
+   ignore (Loc.in_file_line ~file_cache ~line : Loc.t);
+   ())
+  [@alert "-deprecated"] [@coverage off]
+;;
