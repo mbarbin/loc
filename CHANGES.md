@@ -1,3 +1,9 @@
+## 0.3.0 (2025-03-15)
+
+### Deprecated
+
+- Deprecate `Loc.in_file` and `Loc.in_file_line` and add `ocamlmig` migration annotations (#11, @mbarbin, @v-gb).
+
 ## 0.2.2 (2024-11-04)
 
 ### Fixed
