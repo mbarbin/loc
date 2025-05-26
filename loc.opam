@@ -11,7 +11,7 @@ depends: [
   "dune" {>= "3.17"}
   "ocaml" {>= "4.14"}
   "fpath" {>= "0.7.3"}
-  "sexplib0" {>= "v0.16" & < "v0.18"}
+  "sexplib0" {>= "v0.16"}
   "stdune" {>= "3.17"}
   "odoc" {with-doc}
 ]
