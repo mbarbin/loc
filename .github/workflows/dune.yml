@@ -28,7 +28,7 @@ jobs:
           echo "dune-cache-root=$HOME/.cache/dune" >> "$GITHUB_OUTPUT"
 
       - name: Restore dune cache
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         id: dune-cache
         with:
           path: ${{ steps.setup-dune.outputs.dune-cache-root }}
