@@ -1,0 +1,66 @@
+name: dune-pkg build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "**" # This will match pull requests targeting any branch
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        runs-on: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.runs-on }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install and setup dune
+        id: setup-dune
+        shell: bash
+        run: |
+          curl -fsSL https://get.dune.build/install | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          echo "dune-cache-root=$HOME/.cache/dune" >> "$GITHUB_OUTPUT"
+
+      - name: Restore dune cache
+        uses: actions/cache/restore@v4
+        id: dune-cache
+        with:
+          path: ${{ steps.setup-dune.outputs.dune-cache-root }}
+          key: dune-cache-${{ runner.os }}-${{ runner.arch }}
+
+      - name: Install gpatch and add to PATH on macOS
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          brew update
+          brew install gpatch
+          echo "/opt/homebrew/opt/gpatch/libexec/gnubin" >> $GITHUB_PATH
+
+      - name: Resolve dependencies
+        shell: bash
+        run: |
+          dune pkg lock
+
+      - name: Install depexts
+        shell: bash
+        run: |
+          bash "${{ github.workspace }}/.github/install-depexts.sh"
+        env:
+          RUNNER_OS: ${{ runner.os }}
+
+      - name: Build project
+        shell: bash
+        run: |
+          dune build loc.install
+
+      - name: Save dune cache
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ steps.setup-dune.outputs.dune-cache-root }}
+          key: ${{ steps.dune-cache.outputs.cache-primary-key }}
