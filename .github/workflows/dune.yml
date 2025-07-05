@@ -34,6 +34,13 @@ jobs:
           path: ${{ steps.setup-dune.outputs.dune-cache-root }}
           key: dune-cache-${{ runner.os }}-${{ runner.arch }}
 
+      - name: Install gpatch on macOS
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          brew update
+          brew install gpatch
+
       - name: Resolve dependencies
         shell: bash
         run: |
