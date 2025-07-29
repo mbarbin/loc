@@ -1,4 +1,19 @@
+## 0.3.1 (2025-07-29)
+
+### Changed
+
+- Internal `ppx_js_style` configuration change (allow let-operators) (@mbarbin).
+- Removed pkg upper bounds by default unless there is a known issue (@mbarbin).
+
+### Fixed
+
+- Enable `implicit_transitive_deps` depending on OCaml version (@mbarbin).
+
 ## 0.3.0 (2025-03-15)
+
+### Changed
+
+- Required `dune.3.17` (@mbarbin).
 
 ### Deprecated
 
