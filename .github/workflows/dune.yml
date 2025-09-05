@@ -26,4 +26,7 @@ jobs:
         # This is testing the [setup-dune/cache] branch.
         uses: mbarbin/setup-dune@be92ec5bdb994ea6227ecafaaa8d6d0f08330142
         with:
+          # We are purposely using 3.19 and not 3.20 or dev to experiment with
+          # caching the compiler used in the build (discussion in the cache PR).
+          version: 3.19.1
           automagic: true
