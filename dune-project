@@ -46,6 +46,8 @@
  (depends
   (ocaml
    (>= 4.14))
+  (dune
+   (< 3.20))
   (ocamlformat
    (and
     :with-dev-setup
