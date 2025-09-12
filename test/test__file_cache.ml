@@ -1,3 +1,9 @@
+(*********************************************************************************)
+(*  loc: Representing ranges of lexing positions from parsed files               *)
+(*  SPDX-FileCopyrightText: 2023-2025 Mathieu Barbin <mathieu.barbin@gmail.com>  *)
+(*  SPDX-License-Identifier: MIT                                                 *)
+(*********************************************************************************)
+
 let%expect_test "create" =
   let test file_contents =
     let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents in

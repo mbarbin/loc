@@ -1,0 +1,5 @@
+(*_********************************************************************************)
+(*_  loc: Representing ranges of lexing positions from parsed files               *)
+(*_  SPDX-FileCopyrightText: 2023-2025 Mathieu Barbin <mathieu.barbin@gmail.com>  *)
+(*_  SPDX-License-Identifier: MIT                                                 *)
+(*_********************************************************************************)

@@ -1,3 +1,9 @@
+(*********************************************************************************)
+(*  loc: Representing ranges of lexing positions from parsed files               *)
+(*  SPDX-FileCopyrightText: 2023-2025 Mathieu Barbin <mathieu.barbin@gmail.com>  *)
+(*  SPDX-License-Identifier: MIT                                                 *)
+(*********************************************************************************)
+
 module Lexing_position = struct
   type t = Lexing.position
 

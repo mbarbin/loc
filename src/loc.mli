@@ -1,3 +1,9 @@
+(*_********************************************************************************)
+(*_  loc: Representing ranges of lexing positions from parsed files               *)
+(*_  SPDX-FileCopyrightText: 2023-2025 Mathieu Barbin <mathieu.barbin@gmail.com>  *)
+(*_  SPDX-License-Identifier: MIT                                                 *)
+(*_********************************************************************************)
+
 (** A library to manipulate code locations, typically to decorate AST nodes
     built by parser so as to allow located error messages. *)
 
