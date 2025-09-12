@@ -29,20 +29,20 @@ let%expect_test "sexp_of" =
   print_s [%sexp (r1 : Loc.Range.t)];
   [%expect
     {|
-    ((start 9)
-     (stop  26))
+    ((start 430)
+     (stop  447))
     |}];
   print_s [%sexp (r2 : Loc.Range.t)];
   [%expect
     {|
-    ((start 26)
-     (stop  43))
+    ((start 447)
+     (stop  464))
     |}];
   print_s [%sexp (r3 : Loc.Range.t)];
   [%expect
     {|
-    ((start 9)
-     (stop  43))
+    ((start 430)
+     (stop  464))
     |}];
   ()
 ;;

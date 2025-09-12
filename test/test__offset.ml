@@ -29,7 +29,7 @@ let%expect_test "equal" =
 
 let%expect_test "of_position" =
   print_s [%sexp (Loc.Offset.of_position p1 : Loc.Offset.t)];
-  [%expect {| 9 |}];
+  [%expect {| 430 |}];
   ()
 ;;
 
@@ -37,20 +37,20 @@ let%expect_test "start/stop" =
   print_offsets (Loc.of_position p1);
   [%expect
     {|
-    ((start_offset 9)
-     (stop_offset  9))
+    ((start_offset 430)
+     (stop_offset  430))
     |}];
   print_offsets (Loc.of_position p2);
   [%expect
     {|
-    ((start_offset 26)
-     (stop_offset  26))
+    ((start_offset 447)
+     (stop_offset  447))
     |}];
   print_offsets (Loc.create (p1, p2));
   [%expect
     {|
-    ((start_offset 9)
-     (stop_offset  26))
+    ((start_offset 430)
+     (stop_offset  447))
     |}];
   ()
 ;;
