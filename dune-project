@@ -48,16 +48,8 @@
    (>= 4.14))
   (dune
    (< 3.20))
-  (ocamlformat
-   (and
-    :with-dev-setup
-    (= 0.27.0)))
   (base
    (>= v0.16))
-  (bisect_ppx
-   (and
-    :with-dev-setup
-    (>= 2.8.3)))
   (expect_test_helpers_core
    (>= v0.16))
   (fpath
@@ -74,10 +66,52 @@
    (>= v0.16))
   (ppx_here
    (>= v0.16))
+  (ppx_let
+   (>= v0.16))
+  (ppx_sexp_conv
+   (>= v0.16))
+  (ppx_sexp_value
+   (>= v0.16))
+  (ppxlib
+   (>= 0.33))
+  (stdune
+   (>= 3.17))))
+
+(package
+ (name loc-dev)
+ (synopsis "Package to regroup dev targets, documentation, and more")
+ (allow_empty)
+ (depends
+  (ocaml
+   (>= 4.14))
+  (dune
+   (< 3.20))
+  (ocamlformat
+   (= 0.27.0))
+  (base
+   (>= v0.16))
+  (bisect_ppx
+   (>= 2.8.3))
+  (expect_test_helpers_core
+   (>= v0.16))
+  (fpath
+   (>= 0.7.3))
+  (loc
+   (= :version))
+  (loc-tests
+   (= :version))
+  (ppx_compare
+   (>= v0.16))
+  (ppx_enumerate
+   (>= v0.16))
+  (ppx_expect
+   (>= v0.16))
+  (ppx_hash
+   (>= v0.16))
+  (ppx_here
+   (>= v0.16))
   (ppx_js_style
-   (and
-    :with-dev-setup
-    (>= v0.16)))
+   (>= v0.16))
   (ppx_let
    (>= v0.16))
   (ppx_sexp_conv
