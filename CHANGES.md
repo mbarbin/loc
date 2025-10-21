@@ -1,3 +1,14 @@
+## 0.3.2 (unreleased)
+
+### Added
+
+- Added SPDX-License headers to source files (@mbarbin).
+
+### Changed
+
+- Simplify handling of dev dependencies (@mbarbin).
+- Internal changes to improve the CI & test `setup-dune` (@mbarbin).
+
 ## 0.3.1 (2025-07-29)
 
 ### Changed
