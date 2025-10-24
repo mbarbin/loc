@@ -87,7 +87,7 @@
   (dune
    (< 3.20))
   (ocamlformat
-   (= 0.27.0))
+   (= 0.28.1))
   (base
    (>= v0.16))
   (bisect_ppx
