@@ -2,6 +2,7 @@
 
 ### Added
 
+- Add support to generate `Dyn` values for most types (@mbarbin).
 - Added SPDX-License headers to source files (@mbarbin).
 
 ### Changed
