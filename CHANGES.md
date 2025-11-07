@@ -2,13 +2,15 @@
 
 ### Added
 
-- Add support to generate `Dyn` values for most types (@mbarbin).
-- Added SPDX-License headers to source files (@mbarbin).
+- Add support to generate `Dyn` values for most types (#18, @mbarbin).
+- Enable OCaml `5.4` in CI (#17, @mbarbin).
+- Added SPDX-License headers to source files (a1897699, @mbarbin).
+- Add new workflow based on `setup-dune` (#13, @mbarbin).
 
 ### Changed
 
 - Simplify handling of dev dependencies (@mbarbin).
-- Internal changes to improve the CI & test `setup-dune` (@mbarbin).
+- Internal changes to improve the CI & test `setup-dune` (#14, @mbarbin).
 
 ## 0.3.1 (2025-07-29)
 
