@@ -33,6 +33,8 @@
  (depends
   (ocaml
    (>= 4.14))
+  (dyn
+   (>= 3.17))
   (fpath
    (>= 0.7.3))
   (sexplib0
@@ -50,6 +52,8 @@
    (< 3.20))
   (base
    (>= v0.16))
+  (dyn
+   (>= 3.17))
   (expect_test_helpers_core
    (>= v0.16))
   (fpath
@@ -92,6 +96,8 @@
    (>= v0.16))
   (bisect_ppx
    (>= 2.8.3))
+  (dyn
+   (>= 3.17))
   (expect_test_helpers_core
    (>= v0.16))
   (fpath

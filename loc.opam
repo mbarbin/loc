@@ -10,6 +10,7 @@ bug-reports: "https://github.com/mbarbin/loc/issues"
 depends: [
   "dune" {>= "3.17"}
   "ocaml" {>= "4.14"}
+  "dyn" {>= "3.17"}
   "fpath" {>= "0.7.3"}
   "sexplib0" {>= "v0.16"}
   "stdune" {>= "3.17"}
