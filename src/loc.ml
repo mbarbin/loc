@@ -13,6 +13,7 @@ module Lexing_position = struct
       [ pos_fname; Int.to_string pos_lnum; Int.to_string (pos_cnum - pos_bol) ]
   ;;
 
+  let to_dyn t = Dyn.String (to_string t)
   let sexp_of_t t = Sexp.Atom (to_string t)
 end
 
@@ -21,6 +22,10 @@ module Lexbuf_loc = struct
     { start : Lexing_position.t
     ; stop : Lexing_position.t
     }
+
+  let to_dyn { start; stop } : Dyn.t =
+    Record [ "start", Lexing_position.to_dyn start; "stop", Lexing_position.to_dyn stop ]
+  ;;
 
   let sexp_of_t { start; stop } : Sexp.t =
     List
@@ -37,6 +42,10 @@ let of_lexbuf_loc : Lexbuf_loc.t -> t = Stdune.Loc.of_lexbuf_loc
 let equal_ignores_locs = ref false
 let equal t1 t2 = !equal_ignores_locs || Stdune.Loc.equal t1 t2
 let include_sexp_of_locs = ref false
+
+let to_dyn t =
+  if !include_sexp_of_locs then Lexbuf_loc.to_dyn (to_lexbuf_loc t) else Dyn.String "_"
+;;
 
 let sexp_of_t t =
   if !include_sexp_of_locs then Lexbuf_loc.sexp_of_t (to_lexbuf_loc t) else Atom "_"
@@ -85,6 +94,16 @@ module File_cache = struct
     ; num_lines : int
     ; bols : int array
     }
+
+  let to_dyn { path; length; ends_with_newline; num_lines; bols } : Dyn.t =
+    Record
+      [ "path", String (path |> Fpath.to_string)
+      ; "length", Int length
+      ; "ends_with_newline", Bool ends_with_newline
+      ; "num_lines", Int num_lines
+      ; "bols", Dyn.array Dyn.int bols
+      ]
+  ;;
 
   let sexp_of_t { path; length; ends_with_newline; num_lines; bols } : Sexp.t =
     List
@@ -180,6 +199,7 @@ module Offset = struct
   type t = int
 
   let equal = Int.equal
+  let to_dyn = Dyn.int
   let sexp_of_t = Sexplib0.Sexp_conv.sexp_of_int
   let of_position (t : Lexing.position) = t.pos_cnum
   let to_position t ~file_cache = File_cache.position file_cache ~pos_cnum:t
@@ -199,6 +219,7 @@ module Range = struct
     }
 
   let equal { start = t1; stop = p1 } { start = t2; stop = p2 } = t1 = t2 && p1 = p2
+  let to_dyn { start; stop } : Dyn.t = Record [ "start", Int start; "stop", Int stop ]
 
   let sexp_of_t { start; stop } : Sexp.t =
     List
@@ -235,6 +256,7 @@ module Txt = struct
   module Loc = struct
     type nonrec t = t
 
+    let to_dyn = to_dyn
     let sexp_of_t = sexp_of_t
     let create = create
     let equal = equal
@@ -248,6 +270,12 @@ module Txt = struct
 
   let equal equal_txt ({ txt = s1; loc = l1 } as t1) ({ txt = s2; loc = l2 } as t2) =
     t1 == t2 || (Loc.equal l1 l2 && equal_txt s1 s2)
+  ;;
+
+  let to_dyn txt_to_dyn { txt; loc } : Dyn.t =
+    if !include_sexp_of_locs
+    then Record [ "txt", txt_to_dyn txt; "loc", Loc.to_dyn loc ]
+    else txt_to_dyn txt
   ;;
 
   let sexp_of_t sexp_of_txt { txt; loc } : Sexp.t =
