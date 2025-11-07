@@ -1,5 +1,5 @@
 _opam
 _build
 _coverage
-coverage.sh
 *.install
+coverage.sh
