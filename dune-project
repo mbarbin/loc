@@ -60,6 +60,8 @@
    (>= 0.7.3))
   (loc
    (= :version))
+  (pp
+   (>= 2.0))
   (ppx_compare
    (>= v0.16))
   (ppx_enumerate
@@ -106,6 +108,8 @@
    (= :version))
   (loc-tests
    (= :version))
+  (pp
+   (>= 2.0))
   (ppx_compare
    (>= v0.16))
   (ppx_enumerate
