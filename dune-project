@@ -33,6 +33,8 @@
  (depends
   (ocaml
    (>= 4.14))
+  (dyn
+   (>= 3.17))
   (fpath
    (>= 0.7.3))
   (sexplib0
@@ -50,12 +52,16 @@
    (< 3.20))
   (base
    (>= v0.16))
+  (dyn
+   (>= 3.17))
   (expect_test_helpers_core
    (>= v0.16))
   (fpath
    (>= 0.7.3))
   (loc
    (= :version))
+  (pp
+   (>= 2.0))
   (ppx_compare
    (>= v0.16))
   (ppx_enumerate
@@ -92,6 +98,8 @@
    (>= v0.16))
   (bisect_ppx
    (>= 2.8.3))
+  (dyn
+   (>= 3.17))
   (expect_test_helpers_core
    (>= v0.16))
   (fpath
@@ -100,6 +108,8 @@
    (= :version))
   (loc-tests
    (= :version))
+  (pp
+   (>= 2.0))
   (ppx_compare
    (>= v0.16))
   (ppx_enumerate

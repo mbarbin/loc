@@ -12,6 +12,12 @@ type t
 
 (** {1 Dumping locations} *)
 
+(** Generate a dynamic serialization of [t]. This follows the same pattern as
+    [sexp_of_t] regarding the rendering of locations (hidden by default). Even
+    though the name of the global boolean is [include_sexp_of_locs] it actually
+    affects both [dyn] and [sexp] rendering alike. *)
+val to_dyn : t -> Dyn.t
+
 (** By default, locations are hidden and rendered as the [Atom "_"]. Locations
     are typically brittle, and not always interesting when inspecting the
     nodes of an AST. You may however set {!val:include_sexp_of_locs} to
@@ -139,6 +145,7 @@ module Offset : sig
   type t = int
 
   val equal : t -> t -> bool
+  val to_dyn : t -> Dyn.t
   val sexp_of_t : t -> Sexp.t
 
   (** Reading the [pos_cnum] of a lexing position. *)
@@ -168,6 +175,7 @@ module Range : sig
     }
 
   val equal : t -> t -> bool
+  val to_dyn : t -> Dyn.t
   val sexp_of_t : t -> Sexp.t
   val of_positions : start:Lexing.position -> stop:Lexing.position -> t
 
@@ -213,6 +221,10 @@ module Txt : sig
   (** It is possible to ignore the locations by setting
       {!val:Loc.equal_ignores_locs} to [true]. *)
   val equal : ('a -> 'a -> bool) -> 'a t -> 'a t -> bool
+
+  (** By default locations are not shown. To include the locations set
+      {!val:Loc.include_sexp_of_locs} to [true]. *)
+  val to_dyn : ('a -> Dyn.t) -> 'a t -> Dyn.t
 
   (** By default locations are not shown. To include the locations set
       {!val:Loc.include_sexp_of_locs} to [true]. *)
@@ -268,6 +280,7 @@ module Private : sig
   module File_cache : sig
     type t = File_cache.t
 
+    val to_dyn : t -> Dyn.t
     val sexp_of_t : t -> Sexp.t
   end
 end

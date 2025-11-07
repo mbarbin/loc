@@ -2,7 +2,7 @@
  (name loc)
  (public_name loc)
  (flags :standard -w +a-4-40-41-42-44-45-48-66 -warn-error +a -open Sexplib0)
- (libraries fpath sexplib0 stdune)
+ (libraries dyn fpath sexplib0 stdune)
  (instrumentation
   (backend bisect_ppx))
  (lint

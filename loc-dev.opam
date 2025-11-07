@@ -13,10 +13,12 @@ depends: [
   "ocamlformat" {= "0.28.1"}
   "base" {>= "v0.16"}
   "bisect_ppx" {>= "2.8.3"}
+  "dyn" {>= "3.17"}
   "expect_test_helpers_core" {>= "v0.16"}
   "fpath" {>= "0.7.3"}
   "loc" {= version}
   "loc-tests" {= version}
+  "pp" {>= "2.0"}
   "ppx_compare" {>= "v0.16"}
   "ppx_enumerate" {>= "v0.16"}
   "ppx_expect" {>= "v0.16"}
