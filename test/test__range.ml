@@ -4,12 +4,14 @@
 (*  SPDX-License-Identifier: MIT                                                 *)
 (*********************************************************************************)
 
+open! Import
+
 let p1 = [%here]
 let p2 = [%here]
 let p3 = [%here]
 
 let%expect_test "equal" =
-  let test r1 r2 = print_s [%sexp (Loc.Range.equal r1 r2 : bool)] in
+  let test r1 r2 = print_dyn (Loc.Range.equal r1 r2 |> Dyn.bool) in
   let r1 = Loc.Range.of_positions ~start:p1 ~stop:p1 in
   let r2 = Loc.Range.of_positions ~start:p1 ~stop:p2 in
   let r3 = Loc.Range.of_positions ~start:p1 ~stop:p2 in
@@ -26,24 +28,12 @@ let%expect_test "sexp_of" =
   let r1 = Loc.Range.of_positions ~start:p1 ~stop:p2 in
   let r2 = Loc.Range.of_positions ~start:p2 ~stop:p3 in
   let r3 = Loc.Range.of_positions ~start:p1 ~stop:p3 in
-  print_s [%sexp (r1 : Loc.Range.t)];
-  [%expect
-    {|
-    ((start 430)
-     (stop  447))
-    |}];
-  print_s [%sexp (r2 : Loc.Range.t)];
-  [%expect
-    {|
-    ((start 447)
-     (stop  464))
-    |}];
-  print_s [%sexp (r3 : Loc.Range.t)];
-  [%expect
-    {|
-    ((start 430)
-     (stop  464))
-    |}];
+  print_dyn (r1 |> Loc.Range.to_dyn);
+  [%expect {| { start = 444; stop = 461 } |}];
+  print_dyn (r2 |> Loc.Range.to_dyn);
+  [%expect {| { start = 461; stop = 478 } |}];
+  print_dyn (r3 |> Loc.Range.to_dyn);
+  [%expect {| { start = 444; stop = 478 } |}];
   ()
 ;;
 

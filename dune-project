@@ -50,36 +50,22 @@
    (>= 4.14))
   (dune
    (< 3.20))
-  (base
-   (>= v0.16))
   (dyn
    (>= 3.17))
-  (expect_test_helpers_core
-   (>= v0.16))
   (fpath
    (>= 0.7.3))
   (loc
    (= :version))
   (pp
    (>= 2.0.0))
-  (ppx_compare
-   (>= v0.16))
-  (ppx_enumerate
-   (>= v0.16))
   (ppx_expect
-   (>= v0.16))
-  (ppx_hash
    (>= v0.16))
   (ppx_here
    (>= v0.16))
-  (ppx_let
-   (>= v0.16))
-  (ppx_sexp_conv
-   (>= v0.16))
-  (ppx_sexp_value
-   (>= v0.16))
   (ppxlib
    (>= 0.33))
+  (sexplib0
+   (>= v0.16))
   (stdune
    (>= 3.17))))
 
@@ -94,14 +80,10 @@
    (< 3.20))
   (ocamlformat
    (= 0.28.1))
-  (base
-   (>= v0.16))
   (bisect_ppx
    (>= 2.8.3))
   (dyn
    (>= 3.17))
-  (expect_test_helpers_core
-   (>= v0.16))
   (fpath
    (>= 0.7.3))
   (loc
@@ -110,29 +92,15 @@
    (= :version))
   (pp
    (>= 2.0.0))
-  (ppx_compare
-   (>= v0.16))
-  (ppx_enumerate
-   (>= v0.16))
   (ppx_expect
-   (>= v0.16))
-  (ppx_hash
    (>= v0.16))
   (ppx_here
    (>= v0.16))
   (ppx_js_style
-   (>= v0.16))
-  (ppx_let
-   (>= v0.16))
-  (ppx_sexp_conv
-   (>= v0.16))
-  (ppx_sexp_value
    (>= v0.16))
   (ppxlib
    (>= 0.33))
   (stdune
    (>= 3.17))
   (sherlodoc
-   (and
-    :with-doc
-    (>= 0.2)))))
+   (>= 0.2))))
