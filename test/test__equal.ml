@@ -4,7 +4,9 @@
 (*  SPDX-License-Identifier: MIT                                                 *)
 (*********************************************************************************)
 
-let test loc1 loc2 = print_s [%sexp (Loc.equal loc1 loc2 : bool)]
+open! Import
+
+let test loc1 loc2 = print_dyn (Loc.equal loc1 loc2 |> Dyn.bool)
 
 let%expect_test "ignore" =
   let loc1 = Loc.of_pos ("file1", 1, 0, 0) in

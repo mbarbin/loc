@@ -4,6 +4,8 @@
 (*  SPDX-License-Identifier: MIT                                                 *)
 (*********************************************************************************)
 
+open! Import
+
 let loc = Loc.of_file ~path:(Fpath.v "file")
 
 let%expect_test "to_string" =
@@ -21,24 +23,20 @@ let%expect_test "path" =
 ;;
 
 let%expect_test "start_line" =
-  print_s [%sexp (Loc.start_line loc : int)];
+  print_dyn (Loc.start_line loc |> Dyn.int);
   [%expect {| 1 |}];
   ()
 ;;
 
 let%expect_test "is_none" =
-  print_s [%sexp (Loc.is_none loc : bool)];
+  print_dyn (Loc.is_none loc |> Dyn.bool);
   [%expect {| false |}];
   ()
 ;;
 
 let%expect_test "range" =
-  print_s [%sexp (Loc.range loc : Loc.Range.t)];
-  [%expect
-    {|
-    ((start 0)
-     (stop  0))
-    |}];
+  print_dyn (Loc.range loc |> Loc.Range.to_dyn);
+  [%expect {| { start = 0; stop = 0 } |}];
   ()
 ;;
 

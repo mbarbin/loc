@@ -4,16 +4,18 @@
 (*  SPDX-License-Identifier: MIT                                                 *)
 (*********************************************************************************)
 
+open! Import
+
 let%expect_test "is_none" =
-  print_s [%sexp (Loc.is_none Loc.none : bool)];
+  print_dyn (Loc.is_none Loc.none |> Dyn.bool);
   [%expect {| true |}];
-  print_s [%sexp (Loc.is_none (Loc.of_position [%here]) : bool)];
+  print_dyn (Loc.is_none (Loc.of_position [%here]) |> Dyn.bool);
   [%expect {| false |}];
   ()
 ;;
 
 let%expect_test "equal" =
-  print_s [%sexp (Loc.equal Loc.none Loc.none : bool)];
+  print_dyn (Loc.equal Loc.none Loc.none |> Dyn.bool);
   [%expect {| true |}];
   ()
 ;;
@@ -33,31 +35,23 @@ let%expect_test "path" =
 ;;
 
 let%expect_test "start_line" =
-  print_s [%sexp (Loc.start_line Loc.none : int)];
+  print_dyn (Loc.start_line Loc.none |> Dyn.int);
   [%expect {| 1 |}];
   ()
 ;;
 
 let%expect_test "offsets" =
-  print_s
-    [%sexp
-      { start_offset = (Loc.start_offset Loc.none : int)
-      ; stop_offset = (Loc.stop_offset Loc.none : int)
-      }];
-  [%expect
-    {|
-    ((start_offset 0)
-     (stop_offset  0))
-    |}];
+  print_dyn
+    (Dyn.record
+       [ "start_offset", Loc.start_offset Loc.none |> Dyn.int
+       ; "stop_offset", Loc.stop_offset Loc.none |> Dyn.int
+       ]);
+  [%expect {| { start_offset = 0; stop_offset = 0 } |}];
   ()
 ;;
 
 let%expect_test "range" =
-  print_s [%sexp (Loc.range Loc.none : Loc.Range.t)];
-  [%expect
-    {|
-    ((start 0)
-     (stop  0))
-    |}];
+  print_dyn (Loc.range Loc.none |> Loc.Range.to_dyn);
+  [%expect {| { start = 0; stop = 0 } |}];
   ()
 ;;

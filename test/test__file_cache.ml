@@ -4,64 +4,72 @@
 (*  SPDX-License-Identifier: MIT                                                 *)
 (*********************************************************************************)
 
+open! Import
+
 let%expect_test "create" =
   let test file_contents =
     let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents in
-    print_s [%sexp (file_cache : Loc.Private.File_cache.t)]
+    print_dyn (file_cache |> Loc.Private.File_cache.to_dyn)
   in
   test "";
   [%expect
     {|
-    ((path              foo.txt)
-     (length            0)
-     (ends_with_newline false)
-     (num_lines         1)
-     (bols (0)))
+    { path = "foo.txt"
+    ; length = 0
+    ; ends_with_newline = false
+    ; num_lines = 1
+    ; bols = [| 0 |]
+    }
     |}];
   test "Hello";
   [%expect
     {|
-    ((path              foo.txt)
-     (length            5)
-     (ends_with_newline false)
-     (num_lines         1)
-     (bols (0 5)))
+    { path = "foo.txt"
+    ; length = 5
+    ; ends_with_newline = false
+    ; num_lines = 1
+    ; bols = [| 0;  5 |]
+    }
     |}];
   test "Hello\nWorld";
   [%expect
     {|
-    ((path              foo.txt)
-     (length            11)
-     (ends_with_newline false)
-     (num_lines         2)
-     (bols (0 6 11)))
+    { path = "foo.txt"
+    ; length = 11
+    ; ends_with_newline = false
+    ; num_lines = 2
+    ; bols = [| 0;  6;  11 |]
+    }
     |}];
   test "Hello\nWorld\n";
   [%expect
     {|
-    ((path              foo.txt)
-     (length            12)
-     (ends_with_newline true)
-     (num_lines         2)
-     (bols (0 6 12)))
+    { path = "foo.txt"
+    ; length = 12
+    ; ends_with_newline = true
+    ; num_lines = 2
+    ; bols = [| 0;  6;  12 |]
+    }
     |}];
   test "Hello\nFriendly\nWorld";
   [%expect
     {|
-    ((path              foo.txt)
-     (length            20)
-     (ends_with_newline false)
-     (num_lines         3)
-     (bols (0 6 15 20)))
+    { path = "foo.txt"
+    ; length = 20
+    ; ends_with_newline = false
+    ; num_lines = 3
+    ; bols = [| 0;  6;  15;  20 |]
+    }
     |}];
   test "Hello\nFriendly\nWorld\n";
   [%expect
     {|
-    ((path              foo.txt)
-     (length            21)
-     (ends_with_newline true)
-     (num_lines         3)
-     (bols (0 6 15 21)))
+    { path = "foo.txt"
+    ; length = 21
+    ; ends_with_newline = true
+    ; num_lines = 3
+    ; bols = [| 0;  6;  15;  21 |]
+    }
     |}];
   ()
 ;;
@@ -75,19 +83,19 @@ let%expect_test "getters" =
 
 let%expect_test "negative" =
   let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents:"" in
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:0);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:(-1));
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:0);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:(-1));
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
   ()
 ;;
 
 let%expect_test "out of bounds" =
   let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents:"" in
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:2);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:3);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:2);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:3);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
   ()
 ;;
 
@@ -95,8 +103,8 @@ let%expect_test "empty file" =
   let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents:"" in
   print_endline (Loc.to_string (Loc.of_file_line ~file_cache ~line:1));
   [%expect {| File "foo.txt", line 1, characters 0-0: |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:2);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:2);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
   ()
 ;;
 
@@ -106,8 +114,8 @@ let%expect_test "single line" =
   in
   print_endline (Loc.to_string (Loc.of_file_line ~file_cache ~line:1));
   [%expect {| File "foo.txt", line 1, characters 0-5: |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:2);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:2);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
   ()
 ;;
 
@@ -117,8 +125,8 @@ let%expect_test "single line with newline" =
   in
   print_endline (Loc.to_string (Loc.of_file_line ~file_cache ~line:1));
   [%expect {| File "foo.txt", line 1, characters 0-5: |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:2);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:2);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
   ()
 ;;
 
@@ -132,10 +140,10 @@ let%expect_test "empty lines" =
   [%expect {| File "foo.txt", line 2, characters 0-0: |}];
   print_endline (Loc.to_string (Loc.of_file_line ~file_cache ~line:3));
   [%expect {| File "foo.txt", line 3, characters 0-0: |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:4);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:5);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:4);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:5);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
   ()
 ;;
 
@@ -153,8 +161,8 @@ let%expect_test "non-empty" =
   [%expect {| File "foo.txt", line 3, characters 0-5: |}];
   print_endline (Loc.to_string (Loc.of_file_line ~file_cache ~line:4));
   [%expect {| File "foo.txt", line 4, characters 0-5: |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:5);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:5);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
   ()
 ;;
 
@@ -164,10 +172,10 @@ let%expect_test "newline" =
   in
   print_endline (Loc.to_string (Loc.of_file_line ~file_cache ~line:1));
   [%expect {| File "foo.txt", line 1, characters 0-5: |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:2);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
-  require_does_raise [%here] (fun () -> Loc.of_file_line ~file_cache ~line:3);
-  [%expect {| (Invalid_argument Loc.of_file_line) |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:2);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
+  require_does_raise (fun () -> Loc.of_file_line ~file_cache ~line:3);
+  [%expect {| Invalid_argument("Loc.of_file_line") |}];
   ()
 ;;
 
@@ -184,10 +192,10 @@ let%expect_test "of_file_offset" =
     let loc = Loc.of_file_offset ~file_cache ~offset in
     print_endline (Loc.to_string loc)
   in
-  require_does_raise [%here] (fun () -> test (-1));
-  [%expect {| (Invalid_argument Loc.File_cache.position) |}];
-  require_does_raise [%here] (fun () -> test (String.length file_contents + 1));
-  [%expect {| (Invalid_argument Loc.File_cache.position) |}];
+  require_does_raise (fun () -> test (-1));
+  [%expect {| Invalid_argument("Loc.File_cache.position") |}];
+  require_does_raise (fun () -> test (String.length file_contents + 1));
+  [%expect {| Invalid_argument("Loc.File_cache.position") |}];
   test 0;
   [%expect {| File "foo.txt", line 1, characters 0-0: |}];
   test 1;
@@ -204,63 +212,66 @@ let%expect_test "of_file_offset" =
 let%expect_test "of_file_offset more" =
   let file_contents = "Hello\nWorld" in
   let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents in
-  print_s [%sexp (file_cache : Loc.Private.File_cache.t)];
+  print_dyn (file_cache |> Loc.Private.File_cache.to_dyn);
   [%expect
     {|
-    ((path              foo.txt)
-     (length            11)
-     (ends_with_newline false)
-     (num_lines         2)
-     (bols (0 6 11)))
+    { path = "foo.txt"
+    ; length = 11
+    ; ends_with_newline = false
+    ; num_lines = 2
+    ; bols = [| 0;  6;  11 |]
+    }
     |}];
   let test offset =
     let loc = Loc.of_file_offset ~file_cache ~offset in
     print_endline (Loc.to_string loc)
   in
-  require_does_raise [%here] (fun () -> test (String.length file_contents + 1));
-  [%expect {| (Invalid_argument Loc.File_cache.position) |}];
+  require_does_raise (fun () -> test (String.length file_contents + 1));
+  [%expect {| Invalid_argument("Loc.File_cache.position") |}];
   test (String.length file_contents);
   [%expect {| File "foo.txt", line 3, characters 0-0: |}];
   test (String.length file_contents - 1);
   [%expect {| File "foo.txt", line 2, characters 4-4: |}];
   let file_contents = "Hello\nFriendly\nWorld\n" in
   let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents in
-  print_s [%sexp (file_cache : Loc.Private.File_cache.t)];
+  print_dyn (file_cache |> Loc.Private.File_cache.to_dyn);
   [%expect
     {|
-    ((path              foo.txt)
-     (length            21)
-     (ends_with_newline true)
-     (num_lines         3)
-     (bols (0 6 15 21)))
+    { path = "foo.txt"
+    ; length = 21
+    ; ends_with_newline = true
+    ; num_lines = 3
+    ; bols = [| 0;  6;  15;  21 |]
+    }
     |}];
   let test offset =
     let loc = Loc.of_file_offset ~file_cache ~offset in
     print_endline (Loc.to_string loc)
   in
-  require_does_raise [%here] (fun () -> test (String.length file_contents + 1));
-  [%expect {| (Invalid_argument Loc.File_cache.position) |}];
+  require_does_raise (fun () -> test (String.length file_contents + 1));
+  [%expect {| Invalid_argument("Loc.File_cache.position") |}];
   test (String.length file_contents);
   [%expect {| File "foo.txt", line 4, characters 0-0: |}];
   test (String.length file_contents - 1);
   [%expect {| File "foo.txt", line 3, characters 5-5: |}];
   let file_contents = "Hello\nFriendly\nWorld" in
   let file_cache = Loc.File_cache.create ~path:(Fpath.v "foo.txt") ~file_contents in
-  print_s [%sexp (file_cache : Loc.Private.File_cache.t)];
+  print_dyn (file_cache |> Loc.Private.File_cache.to_dyn);
   [%expect
     {|
-    ((path              foo.txt)
-     (length            20)
-     (ends_with_newline false)
-     (num_lines         3)
-     (bols (0 6 15 20)))
+    { path = "foo.txt"
+    ; length = 20
+    ; ends_with_newline = false
+    ; num_lines = 3
+    ; bols = [| 0;  6;  15;  20 |]
+    }
     |}];
   let test offset =
     let loc = Loc.of_file_offset ~file_cache ~offset in
     print_endline (Loc.to_string loc)
   in
-  require_does_raise [%here] (fun () -> test (String.length file_contents + 1));
-  [%expect {| (Invalid_argument Loc.File_cache.position) |}];
+  require_does_raise (fun () -> test (String.length file_contents + 1));
+  [%expect {| Invalid_argument("Loc.File_cache.position") |}];
   test (String.length file_contents);
   [%expect {| File "foo.txt", line 4, characters 0-0: |}];
   test (String.length file_contents - 1);
@@ -275,12 +286,12 @@ let%expect_test "of_file_range" =
     let loc = Loc.of_file_range ~file_cache ~range:{ start; stop } in
     print_endline (Loc.to_string loc)
   in
-  require_does_raise [%here] (fun () -> test (-1) 0);
-  [%expect {| (Invalid_argument Loc.File_cache.position) |}];
-  require_does_raise [%here] (fun () -> test 0 (String.length file_contents + 1));
-  [%expect {| (Invalid_argument Loc.File_cache.position) |}];
-  require_does_raise [%here] (fun () -> test 1 0);
-  [%expect {| (Invalid_argument Loc.of_file_range) |}];
+  require_does_raise (fun () -> test (-1) 0);
+  [%expect {| Invalid_argument("Loc.File_cache.position") |}];
+  require_does_raise (fun () -> test 0 (String.length file_contents + 1));
+  [%expect {| Invalid_argument("Loc.File_cache.position") |}];
+  require_does_raise (fun () -> test 1 0);
+  [%expect {| Invalid_argument("Loc.of_file_range") |}];
   test 0 0;
   [%expect {| File "foo.txt", line 1, characters 0-0: |}];
   test 0 1;
