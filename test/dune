@@ -1,6 +1,6 @@
 (library
  (name loc_test)
- (public_name loc-tests.loc_test)
+ (package loc-tests)
  (inline_tests)
  (flags :standard -w +a-4-40-41-42-44-45-48-66 -warn-error +a)
  (libraries dyn fpath loc pp sexplib0)
