@@ -48,8 +48,6 @@
  (depends
   (ocaml
    (>= 4.14))
-  (dune
-   (< 3.20))
   (dyn
    (>= 3.17))
   (fpath
@@ -76,8 +74,6 @@
  (depends
   (ocaml
    (>= 4.14))
-  (dune
-   (< 3.20))
   (ocamlformat
    (= 0.28.1))
   (bisect_ppx

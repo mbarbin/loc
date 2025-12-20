@@ -22,10 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Setup dune
-        uses: mbarbin/setup-dune@b5f5154dbe381e40c33d8d22fbc92d6fe3c52c87 # v1.0.0
+      - name: Dune Pkg CI
+        uses: mbarbin/setup-dune@fd640f52b2a84d68cd4867cb5972247b70630d1a # repkg
         with:
-          # We are purposely using 3.19 and not 3.20 or dev to experiment with
-          # caching the compiler used in the build (discussion in the cache PR).
-          version: 3.19.1
-          automagic: true
+          steps: all
