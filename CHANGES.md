@@ -1,4 +1,4 @@
-## 0.3.2 (unreleased)
+## 0.3.2 (2025-12-22)
 
 ### Added
 
@@ -9,7 +9,9 @@
 
 ### Changed
 
-- Simplify handling of dev dependencies (@mbarbin).
+- Experiment with CI based on setup-dune (@21, @mbarbin).
+- Reduce test dependencies (#20, @mbarbin).
+- Simplify handling of dev dependencies (#16, @mbarbin).
 - Internal changes to improve the CI & test `setup-dune` (#14, @mbarbin).
 
 ## 0.3.1 (2025-07-29)
