@@ -9,7 +9,7 @@
 
 ### Changed
 
-- Experiment with CI based on setup-dune (@21, @mbarbin).
+- Experiment with CI based on setup-dune (#21, @mbarbin).
 - Reduce test dependencies (#20, @mbarbin).
 - Simplify handling of dev dependencies (#16, @mbarbin).
 - Internal changes to improve the CI & test `setup-dune` (#14, @mbarbin).
