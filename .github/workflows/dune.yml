@@ -23,6 +23,6 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Dune Pkg CI
-        uses: mbarbin/setup-dune@fd640f52b2a84d68cd4867cb5972247b70630d1a # repkg
+        uses: mbarbin/setup-dune@52d589512797f9c73ed0bb8d2f74a50fa67b1120 # v2.0.0
         with:
           steps: all
