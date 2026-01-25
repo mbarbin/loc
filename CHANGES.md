@@ -1,3 +1,15 @@
+## 0.3.3 (2026-01-25)
+
+This patch release brings internal changes only, with an improvement to the distribution process (immutable releases).
+
+### Added
+
+- Add more CI workflows based on `setup-dune` (@mbarbin).
+
+### Changed
+
+- Improved CI scripts; upgrade and pin CI dependencies (@mbarbin).
+
 ## 0.3.2 (2025-12-22)
 
 ### Added
