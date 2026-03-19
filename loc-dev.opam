@@ -10,7 +10,7 @@ bug-reports: "https://github.com/mbarbin/loc/issues"
 depends: [
   "dune" {>= "3.17"}
   "ocaml" {>= "4.14"}
-  "ocamlformat" {= "0.28.1"}
+  "ocamlformat" {= "0.29.0"}
   "bisect_ppx" {>= "2.8.3"}
   "dyn" {>= "3.17"}
   "fpath" {>= "0.7.3"}
