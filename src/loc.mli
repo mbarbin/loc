@@ -56,14 +56,14 @@ val create : Lexing.position * Lexing.position -> t
 (** To be used with a [Lexing.position], including for example:
 
     {[
-      Loc.of_position [%here]
+    Loc.of_position [%here]
     ]} *)
 val of_position : Lexing.position -> t
 
 (** To be used with the [__POS__] special construct. For example:
 
     {[
-      Loc.of_pos __POS__
+    Loc.of_pos __POS__
     ]} *)
 val of_pos : string * int * int * int -> t
 
@@ -208,7 +208,7 @@ module Txt : sig
       An example using ['a Loc.Txt.t]:
 
       {[
-        type t = A.t Loc.Txt.t list
+      type t = A.t Loc.Txt.t list
       ]} *)
 
   type loc := t
